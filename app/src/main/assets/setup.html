@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Netmon</title>
+<style>
+:root{color-scheme:dark}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f172a;color:#e8edf5;font-family:sans-serif;padding:20px;box-sizing:border-box}
+.c{width:100%;max-width:420px}
+h1{font-size:26px;margin:0 0 6px}p{color:#93a1b8;font-size:14px;line-height:1.6}
+input{width:100%;box-sizing:border-box;padding:14px;border-radius:12px;border:1px solid #25324a;background:#162033;color:#e8edf5;font-size:16px;margin:10px 0}
+button{width:100%;padding:14px;border-radius:12px;border:0;background:#0891b2;color:#fff;font-size:16px;font-weight:700;margin-top:6px}
+button.g{background:#25324a}
+#e{display:none;background:#7f1d1d;border-radius:12px;padding:12px;font-size:14px;margin-bottom:14px}
+</style></head><body><div class="c">
+<h1>Netmon</h1>
+<div id="e">เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจสอบว่าเครื่องออฟฟิศเปิดอยู่ และมือถือต่อ Wi-Fi ออฟฟิศหรือ Tailscale อยู่</div>
+<p>ใส่ที่อยู่เซิร์ฟเวอร์ netmon3d ในออฟฟิศ<br>เช่น <b>192.168.1.50:8090</b> หรือ <b>100.x.x.x:8090</b> (Tailscale)</p>
+<input id="a" type="url" inputmode="url" autocapitalize="none" autocorrect="off" placeholder="ที่อยู่เซิร์ฟเวอร์:พอร์ต" aria-label="ที่อยู่เซิร์ฟเวอร์">
+<button id="go">เชื่อมต่อ</button>
+<button id="rt" class="g" style="display:none">ลองใหม่</button>
+</div>
+<script>
+var a=document.getElementById('a');
+try{a.value=Android.saved()}catch(e){}
+if(location.search.indexOf('err=1')>-1){document.getElementById('e').style.display='block';document.getElementById('rt').style.display='block'}
+document.getElementById('go').onclick=function(){Android.save(a.value)};
+document.getElementById('rt').onclick=function(){Android.retry()};
+a.onkeydown=function(e){if(e.key==='Enter')Android.save(a.value)};
+</script></body></html>
